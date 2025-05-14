@@ -1,4 +1,3 @@
-navigation blade gua
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,15 +15,13 @@ navigation blade gua
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('todo.index')" :active="request()->routeIs('todo.index')">
-                        {{ __('Todo') }}
+                    <x-nav-link :href="route('todo.index')" :active="request()->routeIs('todo.index')">{{ __('Todo') }}</x-nav-link>
+                    <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.*')">
+                        {{ __('Category') }}
                     </x-nav-link>
                     @can('admin')
-                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                        {{ __('User') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">{{ __('User') }}</x-nav-link>
                     @endcan
-
                 </div>
             </div>
 
@@ -80,10 +77,13 @@ navigation blade gua
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('todo.index')" :active="request()->routeIs('todo.index')">
                 {{ __('Todo') }}
             </x-responsive-nav-link>
-
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
                 {{ __('User') }}
             </x-responsive-nav-link>
