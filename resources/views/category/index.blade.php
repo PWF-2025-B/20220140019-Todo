@@ -43,14 +43,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($category as $category)
+                            @forelse ($categories as $category)
                                 <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                                     <td class="px-6 py-4 font-medium text-white">
                                         <a href="{{ route('category.edit', $category) }}" class="hover:underline text-xs text-white">
                                             {{ $category->title }}
                                         </a>
                                     </td>
-                                    <td class="px-6 py-4">{{ $category->todos->count() }}</td>
+                                    <td class="px-6 py-4">{{ $category->todos->count() }}</td> {{-- Perbaikan di sini --}}
                                     <td class="px-6 py-4">
                                         <form action="{{ route('category.destroy', $category) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                             @csrf

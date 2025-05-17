@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-
 use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $category = Category::where('user_id', Auth::id())->get();
-        return view('category.index', compact('category'));
+        // Menggunakan eager loading untuk menghindari N+1 Problem
+        $categories = Category::with('todos')
+            ->where('user_id', Auth::id())
+            ->get();
+
+        return view('category.index', compact('categories'));
     }
 
     public function create()
@@ -58,8 +61,7 @@ class CategoryController extends Controller
             $category->delete();
             return redirect()->route('category.index')->with('success', 'Category deleted successfully!');
         } else {
-        return redirect()->route('category.index')->with('danger', 'You are not authorized to delete this category!');
+            return redirect()->route('category.index')->with('danger', 'You are not authorized to delete this category!');
         }
     }
-
 }

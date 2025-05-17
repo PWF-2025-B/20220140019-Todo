@@ -8,11 +8,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Category extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'title',
         'user_id',
     ];
 
+    /**
+     * Relasi: satu Category memiliki banyak Todo
+     */
     public function todos()
     {
         return $this->hasMany(Todo::class);
