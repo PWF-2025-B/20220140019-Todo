@@ -11,6 +11,9 @@ use Illuminate\Support\Str;
 use Laravel\Sanctum\PersonalAccessToken;
 use Laravel\Sanctum\Sanctum;
 
+use Dedoc\Scramble\Support\Generator\OpenApi;
+use Dedoc\Scramble\Support\Generator\SecurityScheme;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -40,6 +43,11 @@ class AppServiceProvider extends ServiceProvider
         // Konfigurasi dokumentasi API Scramble untuk hanya menyertakan route yang diawali dengan 'api/'
         Scramble::configure()->routes(function (Route $route) {
             return Str::startsWith($route->uri, 'api/');
+        })
+        ->withDocumentTransformers(function (OpenApi $openApi){
+            $openApi->secure(
+                SecurityScheme::http('bearer')
+            );
         });
     }
 }
